@@ -1,0 +1,22 @@
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding-inline: 1rem;
+  padding-block: 0.3rem;
+  border-radius: 1000px;
+  user-select: none;
+}
+
+.active {
+  background-color: #ffc107;
+  color: #333;
+  font-weight: 700;
+  padding-inline: 0.5rem;
+  border-radius: 100px;
+}
+
+.break {
+  letter-spacing: 10px;
+}
