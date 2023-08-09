@@ -1,5 +1,5 @@
 const APIKEY = '?apikey=c9b43ca4';
-const BASE_URL = 'http://www.omdbapi.com/';
+const BASE_URL = 'https://www.omdbapi.com/';
 
 //Search movie with search query
 export async function fetchMovies(query, page = 1) {
