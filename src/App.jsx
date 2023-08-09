@@ -3,8 +3,8 @@ import Home from './ui/Home';
 import AppLayout from './ui/AppLayout';
 import MovieList, { loader as moviesLoader } from './features/movies/MovieList';
 import { loader as movieLoader } from './features/movies/Movie';
-import Watched from './features/watched/watched';
-import Wishlist from './features/wishlist/wishlist';
+import Watched from './features/watched/Watchedatched';
+import Wishlist from './features/wishlist/Wishlist';
 import Movie from './features/movies/Movie';
 
 const router = createBrowserRouter([
