@@ -8,6 +8,8 @@ export async function fetchMovies(query, page = 1) {
   if (!res.ok) throw Error('Failed getting movies');
 
   const data = await res.json();
+
+  if (data.Response === 'False') return null;
   return data;
 }
 

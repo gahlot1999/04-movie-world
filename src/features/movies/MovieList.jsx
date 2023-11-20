@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 function Movies() {
-  const { Search, totalResults } = useLoaderData();
+  const { Search, totalResults, Response } = useLoaderData();
   const [movies, setMovies] = useState([]);
   const { search } = useParams();
   const navigate = useNavigate();
@@ -25,6 +25,13 @@ function Movies() {
 
   return (
     <>
+      {Response === 'False' && (
+        <h1 className='m-8'>
+          Oops! No results found for the entered keyword. Please check your
+          spelling or try a different keyword to find the movie you are looking
+          for.
+        </h1>
+      )}
       <div className='grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-14 my-8 mx-8'>
         {movies.map((movie) => (
           <MovieItem
@@ -35,18 +42,20 @@ function Movies() {
         ))}
       </div>
       <div className='flex items-center justify-center mb-4 text-sm'>
-        <ReactPaginate
-          previousLabel={'<'}
-          nextLabel={'>'}
-          breakLabel={'...'}
-          pageCount={Math.ceil(Number(totalResults) / 10)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageChange}
-          containerClassName={'paginationContainer'}
-          activeClassName={'active'}
-          breakClassName={'break'}
-        />
+        {Response !== 'False' && (
+          <ReactPaginate
+            previousLabel={'<'}
+            nextLabel={'>'}
+            breakLabel={'...'}
+            pageCount={Math.ceil(Number(totalResults) / 10)}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageChange}
+            containerClassName={'paginationContainer'}
+            activeClassName={'active'}
+            breakClassName={'break'}
+          />
+        )}
       </div>
     </>
   );
@@ -57,5 +66,6 @@ export default Movies;
 /* eslint-disable */
 export async function loader({ params }) {
   const movies = await fetchMovies(params.search, params.page);
+  if (movies === null) return { Search: [], Response: 'False' };
   return movies;
 }
